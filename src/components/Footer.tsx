@@ -9,7 +9,7 @@ const Footer = () => {
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-sm">🔥</span>
               </div>
-              <span className="text-xl font-bold text-dark-surface-foreground">hotmart</span>
+              <span className="text-xl font-bold text-dark-surface-foreground">katail</span>
             </div>
             <p className="text-dark-surface-foreground/60 text-sm">
               A maior plataforma de produtos digitais do mundo.
@@ -50,7 +50,7 @@ const Footer = () => {
 
         <div className="border-t border-dark-surface-foreground/10 mt-12 pt-8 text-center">
           <p className="text-dark-surface-foreground/40 text-sm">
-            © 2025 Hotmart. Todos os direitos reservados.
+            © 2025 Katail. Todos os direitos reservados.
           </p>
         </div>
       </div>

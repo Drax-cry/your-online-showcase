@@ -8,18 +8,18 @@ import {
 const faqs = [
   {
     question: "Qual a melhor plataforma para vender cursos online?",
-    answer: "A Hotmart se destaca como uma excelente opção, consolidada no mercado e com recursos robustos para impulsionar suas vendas. Seja qual for o tipo de curso ou público, aqui você tem um ecossistema completo.",
+    answer: "A Katail se destaca como uma excelente opção, consolidada no mercado e com recursos robustos para impulsionar suas vendas. Seja qual for o tipo de curso ou público, aqui você tem um ecossistema completo.",
   },
   {
-    question: "O que é a Hotmart e como funciona?",
-    answer: "A Hotmart é uma plataforma global completa, líder na América Latina para a venda online de produtos digitais e físicos. Com um catálogo de mais de 500 mil produtos e vendas em mais de 188 países.",
+    question: "O que é a Katail e como funciona?",
+    answer: "A Katail é uma plataforma global completa, líder na América Latina para a venda online de produtos digitais e físicos. Com um catálogo de mais de 500 mil produtos e vendas em mais de 188 países.",
   },
   {
-    question: "É possível ganhar dinheiro na Hotmart?",
+    question: "É possível ganhar dinheiro na Katail?",
     answer: "É totalmente possível! A plataforma é um ótimo jeito de vender produtos digitais e físicos. Seus lucros ficam protegidos em uma conta de pagamento segura.",
   },
   {
-    question: "Hotmart: quanto custa? É gratuita?",
+    question: "Katail: quanto custa? É gratuita?",
     answer: "Você pode criar sua conta e registrar produtos digitais gratuitamente. As taxas são aplicadas apenas sobre vendas aprovadas, descontadas no momento da transação.",
   },
   {
@@ -27,7 +27,7 @@ const faqs = [
     answer: "Comece identificando uma necessidade de mercado e validando sua ideia. Nosso onboarding com Inteligência Artificial sugere formato, módulos, assuntos e precificação.",
   },
   {
-    question: "Quanto a Hotmart cobra por venda?",
+    question: "Quanto a Katail cobra por venda?",
     answer: "A taxa é transparente e progressiva. Quanto mais você fatura, menos você paga! Até 5 dígitos de faturamento, a taxa é de 9,9% + R$1 por venda aprovada.",
   },
 ];

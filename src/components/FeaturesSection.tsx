@@ -33,7 +33,7 @@ const FeaturesSection = () => {
             Você foca no conteúdo.
           </h3>
           <h3 className="text-2xl md:text-3xl font-extrabold text-gradient-primary">
-            E a Hotmart aumenta suas conversões.
+            E a Katail aumenta suas conversões.
           </h3>
         </div>
 
