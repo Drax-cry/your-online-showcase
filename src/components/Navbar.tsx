@@ -7,8 +7,8 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-card/70 backdrop-blur-md rounded-2xl shadow-lg w-auto">
-      <div className="px-6">
-        <div className="flex items-center justify-between h-14 gap-6">
+      <div className="px-8">
+        <div className="flex items-center justify-between h-16 gap-8">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
