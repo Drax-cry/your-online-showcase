@@ -28,7 +28,6 @@
       border-radius: 20px;
       padding: 60px 40px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      text-align: center;
       animation: slideUp 0.5s ease-out;
     }
 
@@ -41,6 +40,10 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    .content {
+      text-align: center;
     }
 
     h1 {
@@ -110,6 +113,39 @@
       color: #666;
     }
 
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    input::placeholder {
+      color: #999;
+    }
+
     button {
       width: 100%;
       padding: 16px 32px;
@@ -124,16 +160,16 @@
       font-family: inherit;
     }
 
-    button:hover {
+    button:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
     }
 
-    button:active {
+    button:active:not(:disabled) {
       transform: translateY(0);
     }
 
-    .loading {
+    button:disabled {
       opacity: 0.7;
       cursor: not-allowed;
     }
@@ -147,6 +183,7 @@
       font-size: 14px;
       border-left: 4px solid #c33;
       display: none;
+      text-align: left;
     }
 
     .error.show {
@@ -174,52 +211,61 @@
 </head>
 <body>
   <div class="container">
-    <h1>Your Online Showcase</h1>
-    <p class="subtitle">Crie sua loja online e comece a vender em minutos</p>
+    <div class="content">
+      <h1>Your Online Showcase</h1>
+      <p class="subtitle">Crie sua loja online e comece a vender em minutos</p>
 
-    <div class="features">
-      <h3>Incluso no plano:</h3>
-      <ul>
-        <li>Acesso completo à plataforma</li>
-        <li>Gerenciamento de lojas</li>
-        <li>Até 100 produtos</li>
-        <li>Suporte por email</li>
-        <li>Relatórios e analytics</li>
-      </ul>
+      <div class="features">
+        <h3>Incluso no plano:</h3>
+        <ul>
+          <li>Acesso completo à plataforma</li>
+          <li>Gerenciamento de lojas</li>
+          <li>Até 100 produtos</li>
+          <li>Suporte por email</li>
+          <li>Relatórios e analytics</li>
+        </ul>
+      </div>
+
+      <div class="pricing">
+        <div class="price">€5<span class="price-period">/mês</span></div>
+      </div>
+
+      <div class="error" id="error"></div>
+
+      <form id="paymentForm" onsubmit="handlePayment(event)">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="seu@email.com" 
+            required
+          >
+        </div>
+
+        <button type="submit" id="payBtn">
+          Começar agora - Pagar com Stripe
+        </button>
+      </form>
     </div>
-
-    <div class="pricing">
-      <div class="price">€5<span class="price-period">/mês</span></div>
-    </div>
-
-    <div class="error" id="error"></div>
-
-    <button id="payBtn" onclick="handlePayment()">
-      Começar agora - Pagar com Stripe
-    </button>
   </div>
 
   <script>
     const API_URL = 'http://localhost:3001';
 
-    async function handlePayment() {
+    async function handlePayment(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value;
       const btn = document.getElementById('payBtn');
       const errorDiv = document.getElementById('error');
 
       btn.disabled = true;
-      btn.classList.add('loading');
       btn.textContent = 'Processando...';
       errorDiv.classList.remove('show');
 
       try {
-        const email = prompt('Por favor, insira seu email:');
-        if (!email) {
-          btn.disabled = false;
-          btn.classList.remove('loading');
-          btn.textContent = 'Começar agora - Pagar com Stripe';
-          return;
-        }
-
         const response = await fetch(`${API_URL}/api/create-checkout`, {
           method: 'POST',
           headers: {
@@ -246,7 +292,6 @@
         errorDiv.textContent = err.message || 'Erro ao iniciar pagamento. Tente novamente.';
         errorDiv.classList.add('show');
         btn.disabled = false;
-        btn.classList.remove('loading');
         btn.textContent = 'Começar agora - Pagar com Stripe';
       }
     }
