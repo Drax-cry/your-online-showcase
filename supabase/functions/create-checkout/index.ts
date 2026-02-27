@@ -41,7 +41,7 @@ serve(async (req) => {
       customer_email: customerId ? undefined : user.email,
       line_items: [{ price: priceId, quantity: 1 }],
       mode: "subscription",
-      success_url: `${req.headers.get("origin")}/`,
+      success_url: "https://dropstore-jdjmiuph.manus.space/auth",
       cancel_url: `${req.headers.get("origin")}/`,
     });
 
