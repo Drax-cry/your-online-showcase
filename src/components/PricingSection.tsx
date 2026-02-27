@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PRICE_ID = "price_1T5NdgFozY5OfncchXgROjUD";
 
@@ -16,14 +17,14 @@ const features = [
 
 const PricingSection = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubscribe = async () => {
     setLoading(true);
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        // TODO: redirect to login
-        alert("Você precisa estar logado para assinar.");
+        navigate("/auth");
         return;
       }
 
