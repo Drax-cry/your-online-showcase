@@ -1,10 +1,11 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const PRICE_ID = "price_1T5NdgFozY5OfncchXgROjUD";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const features = [
   "Acesso completo à plataforma",
@@ -22,23 +23,45 @@ const PricingSection = () => {
   const handleSubscribe = async () => {
     setLoading(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate("/auth");
-        return;
+      // Get email from localStorage or prompt user
+      let email = localStorage.getItem("userEmail");
+      
+      if (!email) {
+        email = prompt("Por favor, insira seu email para continuar:");
+        if (!email) {
+          setLoading(false);
+          return;
+        }
+        localStorage.setItem("userEmail", email);
       }
 
-      const { data, error } = await supabase.functions.invoke("create-checkout", {
-        body: { priceId: PRICE_ID },
+      // Create checkout session
+      const response = await fetch(`${API_URL}/api/create-checkout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          priceId: PRICE_ID,
+        }),
       });
 
-      if (error) throw error;
-      if (data?.url) {
-        window.open(data.url, "_blank");
+      if (!response.ok) {
+        throw new Error("Erro ao criar sessão de checkout");
+      }
+
+      const data = await response.json();
+
+      if (data.url) {
+        // Redirect to Stripe checkout
+        window.location.href = data.url;
+      } else {
+        throw new Error("URL de checkout não recebida");
       }
     } catch (err: any) {
       console.error("Checkout error:", err);
-      alert("Erro ao iniciar checkout. Tente novamente.");
+      toast.error(err.message || "Erro ao iniciar checkout. Tente novamente.");
     } finally {
       setLoading(false);
     }
