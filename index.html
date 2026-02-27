@@ -271,10 +271,7 @@
           headers: {
             'Content-Type': 'application/json',
           },
-        body: JSON.stringify({
-          email,
-          priceId: 'price_1T5NdgFozY5OfncchXgROjUD',
-        }),
+          body: JSON.stringify({ email }),
         });
 
         if (!response.ok) {
@@ -289,11 +286,10 @@
         }
       } catch (err) {
         console.error('Erro:', err);
-        errorDiv.textContent = err.message || 'Erro ao iniciar pagamento. Verifique sua conexão e tente novamente.';
+        errorDiv.textContent = err.message || 'Erro ao iniciar pagamento. Tente novamente.';
         errorDiv.classList.add('show');
         btn.disabled = false;
         btn.textContent = 'Começar agora - Pagar com Stripe';
-        document.getElementById('email').focus();
       }
     }
   </script>
