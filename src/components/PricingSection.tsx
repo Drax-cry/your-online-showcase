@@ -6,6 +6,7 @@ import { toast } from "sonner";
 
 const PRICE_ID = "price_1T5NdgFozY5OfncchXgROjUD";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const DROPSTORE_URL = "https://dropstore-jdjmiuph.manus.space";
 
 const features = [
   "Acesso completo à plataforma",
@@ -54,6 +55,8 @@ const PricingSection = () => {
       const data = await response.json();
 
       if (data.url) {
+        // Store email and redirect URL for after payment
+        sessionStorage.setItem("pendingEmail", email);
         // Redirect to Stripe checkout
         window.location.href = data.url;
       } else {

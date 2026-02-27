@@ -20,8 +20,9 @@ const Success = () => {
         }
 
         // Verify subscription
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
         const response = await fetch(
-          `http://localhost:3001/api/verify-subscription?email=${encodeURIComponent(email)}`
+          `${apiUrl}/api/verify-subscription?email=${encodeURIComponent(email)}`
         );
         const data = await response.json();
 
